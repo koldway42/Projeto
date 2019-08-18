@@ -1,0 +1,96 @@
+:root {
+    --dark: #313638;
+    --red-orange: #f06543;
+    --light-gray: #e0dfd5;
+    --white: #e8e9eb;
+    --light-orange: #f09d51;
+
+    --gradient-primary: linear-gradient(to right, 
+        rgb(252, 74, 26),
+        rgb(247, 183, 51)) repeat scroll 0% 0%;
+
+    --gradient-secondary: linear-gradient(to right, 
+        #f06543, 
+        #f09d51) repeat scroll 0% 0%;
+
+    --header-height: 80px;
+    --footer-height: 60px;
+    --nav-width: 250px;
+
+    --shadow: 
+        0 2px 23px 0 rgba(0, 0, 0, 0.1),
+        0 2px 49px 0 rgba(0, 0, 0, 0.06);
+}
+
+@font-face {
+    font-family: "Montserrat";
+    src: url("../assets/fonts/Montserrat-Regular.ttf")
+}
+
+* {
+    box-sizing: border-box;
+    font-family: "Montserrat", sans-serif;
+    overflow: hidden;
+}
+
+.app {
+    margin: 0;
+    height: 100vh;
+    display: grid;
+
+    grid-template-rows: 
+        var(--header-height)
+        1fr
+        var(--footer-height);
+
+    grid-template-columns: var(--nav-width) 1fr;
+
+    grid-template-areas: 
+        "logo header"
+        "nav content"
+        "footer content";
+
+    background: var(--light-gray);
+}
+
+aside.logo {
+    grid-area: logo;
+}
+
+header.header {
+    grid-area: header;
+}
+
+main.content {
+    grid-area: content;
+}
+
+aside.nav-menu {
+    grid-area: nav;
+}
+
+footer.footer {
+    grid-area: footer;
+}
+
+@media(max-width: 720px) {
+
+    .app {
+        grid-template-rows: 100px 50px 50px 1fr 40px;
+
+        grid-template-columns: 1fr;
+
+        grid-template-areas: 
+            "logo"
+            "header"
+            "nav"
+            "content"
+            "footer";
+
+    }
+
+    aside.logo {
+        background: #fff;
+    }
+
+}

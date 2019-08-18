@@ -1,0 +1,12 @@
+footer.footer {
+    background: var(--dark);
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+    box-shadow: var(--shadow);
+}
+
+footer.footer span{
+    color: #fff;
+    font-size: 0.8em
+}

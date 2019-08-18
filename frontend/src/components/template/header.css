@@ -1,0 +1,6 @@
+header.header {
+    background: var(--white);
+    border-left: solid 1px #ddd;
+    box-shadow: var(--shadow);
+}
+
