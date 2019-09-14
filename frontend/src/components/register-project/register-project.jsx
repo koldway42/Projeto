@@ -14,12 +14,12 @@ export default class extends Component {
                             <div className="col-12 mb-4">
                                 <label htmlFor="nome-projeto">Projeto</label>
                                 <input type="text" id="nome-projeto" className="form-control"
-                                placeholder="Digite o nome do seu projeto..."/>
+                                placeholder="Digite o nome do seu projeto..." required />
                             </div>
                             <div className="col-12 mb-4">
                                 <label htmlFor="nome-projeto">Descrição</label>
-                                <textarea type="text" id="nome-projeto" className="form-control"
-                                placeholder="Dê uma descrição amigável..." rows="5"></textarea>
+                                <textarea id="nome-projeto" className="form-control"
+                                placeholder="Dê uma descrição amigável..." rows="5" required />
                             </div>
                         </div>
                         <div className="row">

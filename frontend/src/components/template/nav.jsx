@@ -9,6 +9,7 @@ export default props => {
                 <nav className="row nav">
                         <NavItem item="Início" icon="home" link="#/"/>
                         <NavItem item="Projetos" icon="book" link="#/user"/>
+                        <NavItem item="Contato" icon="phone-square" link="#/contact"/>
                 </nav>
         </aside>
     )
