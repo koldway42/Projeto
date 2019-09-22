@@ -4,3 +4,11 @@ header.header {
     box-shadow: var(--shadow);
 }
 
+@media(max-width: 720px) {
+
+    button#register-project {
+        display: none;
+    }
+
+}
+

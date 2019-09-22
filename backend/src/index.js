@@ -12,7 +12,7 @@ consign()
 
 mongoose.connect("mongodb://127.0.0.1:27017/projeto_at", { useNewUrlParser: true });
 
-const port = 5000;
+const port = 4000;
 
 app.listen(port, () => {
     console.log(`Executando na porta ${port}`)

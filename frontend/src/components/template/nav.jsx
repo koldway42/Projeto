@@ -8,7 +8,7 @@ export default props => {
         <aside className="nav-menu">
                 <nav className="row nav">
                         <NavItem item="Início" icon="home" link="#/"/>
-                        <NavItem item="Projetos" icon="book" link="#/user"/>
+                        <NavItem item="Projetos" icon="book" link="#/projects"/>
                         <NavItem item="Contato" icon="phone-square" link="#/contact"/>
                 </nav>
         </aside>

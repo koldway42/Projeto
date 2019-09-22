@@ -11,15 +11,15 @@ module.exports = {
     },
 
     async store(req, resp) {
-        const { title, description, _id } = req.body;
+        const { title, description, group, room } = req.body;
         const {filename: image} = req.file;
 
         const [name] = image.split(".");
         const filename = `${name}.jpg`;
 
         await sharp(req.file.path)
-        .resize(500)
-        .jpeg({ quality: 70 })
+        .resize(1080)
+        .jpeg({ quality: 100 })
         .toFile(
             path.resolve(req.file.destination, "resized", filename)
         );
@@ -27,10 +27,11 @@ module.exports = {
         fs.unlinkSync(req.file.path);
 
         const publication = await Publication.create({
-            _id,
             title,
             image: filename,
-            description
+            description,
+            group,
+            room
         });
 
         return resp.json(publication);

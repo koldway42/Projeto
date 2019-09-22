@@ -22,10 +22,10 @@ export default class Projects extends Component {
         return (
             <Main>
                 <div className="container-fluid m-2 p-3">
-                    <h1 id="projects-title" className="display-4">Projetos</h1>
+                    <h2 id="projects-title" className="display-4">Projetos</h2>
                     <Accordion id="projects">
                         {this.state.projects.map((project) => (
-                            <Card className="">
+                            <Card key={project._id} className="">
                                 <Card.Header>
                                     <Accordion.Toggle className="text-dark" as={Button} variant="link" eventKey={project._id}>
                                         {project.title}
@@ -35,11 +35,11 @@ export default class Projects extends Component {
                                     <Card.Body>
                                         <aside className="project-body" >
                                             <div className="info-group">
-                                                <p>Grupo: Pessoas</p>
-                                                <p>Sala: sala</p>
-                                                <p>Professor Responsável: </p>
+                                                <h2>{project.title}</h2>
+                                                <p><strong>Grupo: </strong> {project.group}</p>
+                                                <p><strong>Sala: </strong> 3° {project.room}</p>
                                             </div>
-                                            <img src={`http://localhost:5000/files/${project.image}`} alt=""/>
+                                            <img src={`http://localhost:4000/files/${project.image}`} alt=""/>
                                         </aside>
                                         <footer className="project-description">
                                             <h3>Descrição</h3>

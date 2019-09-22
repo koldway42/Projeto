@@ -11,6 +11,23 @@ aside.project-body {
     border-bottom: 1px solid #ccc;
 }
 
+aside.project-body img {
+    width: 100%;
+}
+
+aside.project-body .info-group {
+    text-align: left;
+    width: 100%;
+}
+
+aside.project-body h2 {
+    margin-bottom: 15px;
+    font-weight: 700;
+    border-bottom: 1px solid #ddd;
+    margin-right: 10%;
+    padding-bottom: 20px;
+}
+
 footer.project-description p {
     text-indent: 40px;
     line-height: 35px;
