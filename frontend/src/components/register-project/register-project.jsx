@@ -1,5 +1,7 @@
-import React, { Component } from "react";
+import React, { Component, useState } from "react";
 
+import Button from "react-bootstrap/Button"
+import Alert from 'react-bootstrap/Alert'
 import Main from "../template/main";
 import api from "../../services/api";
 import "./register-project.css"
@@ -11,8 +13,10 @@ export default class extends Component {
         description: "",
         image: null,
         group: "",
-        room: ""
+        room: "Selecione Sua Sala",
     }
+
+    
 
     state = this.defaultState
 
@@ -38,47 +42,101 @@ export default class extends Component {
         await api.post("/projects", data, {})
             .then(resp => {
                 if(resp.status >= 200 && resp.status < 300) {
-                    alert("Projeto Cadastrado com Sucesso");
-                    this.props.history.push("/projects")
+                    this.setState({
+                        message: "Projeto cadastrado Com sucesso!",
+                        status: "success",
+                        ...this.defaultState
+                    })
                 }
             })
-            .catch(err => alert("Ocorreu um erro ao processar sua solicitação."));
+            .catch(err => {
+                this.setState({
+                    message: err.response.data,
+                    status: "error"
+                })
+            });
     }
-    
+
+    AlertDanger(msg = "Teste", variant) {
+        return (
+            <Alert variant={variant}>
+                {msg}
+            </Alert>
+        )
+        
+    }
 
     render() {
+
         return (
             <Main>
                 <div className="container-fluid m-2 p-3">
                     <h1 className="display-4">Registro</h1>
                     <hr/>
+
+                    {
+                        this.state.status === "error" ? 
+                        this.AlertDanger(this.state.message, "danger") : 
+                        this.state.status === "success" ?
+                        this.AlertDanger(this.state.message, "success"): ""
+                    }
+
                     <form id="register-form" onSubmit={e => this.handleSubmit(e)}>
                         <div className="form-group row m-3">
                             <div className="col-12 mb-4">
                                 <label htmlFor="nome-projeto">Projeto</label>
-                                <input type="text"  onChange={e => this.handleChange(e)} id="nome-projeto" className="form-control"
-                                name="title" placeholder="Digite o nome do seu projeto..." required />
+                                <input type="text" 
+                                onChange={e => this.handleChange(e)} 
+                                id="nome-projeto" 
+                                className="form-control"
+                                name="title" 
+                                placeholder="Digite o nome do seu projeto..."
+                                value={this.state.title}
+                                />
                             </div>
                             <div className="col-12 mb-4">
                                 <label htmlFor="nome-projeto">Grupo</label>
-                                <input type="text"  onChange={e => this.handleChange(e)} id="nome-projeto" className="form-control"
-                                name="group"placeholder="Digite o nome do grupo..." required />
+                                <input type="text"
+                                onChange={e => this.handleChange(e)} 
+                                id="nome-projeto" 
+                                className="form-control"
+                                name="group"
+                                placeholder="Digite o nome do grupo..."
+                                value={this.state.group}
+                                />
                             </div>
                             <div className="col-12 mb-4">
                                 <label htmlFor="nome-projeto">Descrição</label>
-                                <textarea id="nome-projeto" onChange={e => this.handleChange(e)} className="form-control"
-                                name="description" placeholder="Dê uma descrição amigável..." rows="5" required />
+                                <textarea 
+                                id="nome-projeto" 
+                                onChange={e => this.handleChange(e)} 
+                                className="form-control"
+                                name="description" 
+                                placeholder="Dê uma descrição amigável..." 
+                                rows="5"
+                                value={this.state.description}
+                                />
                             </div>
                             <div className="form-group col-12 mb-4">
                             <label htmlFor="exampleFormControlSelect1">Sala</label>
-                                <select className="form-control mb-3" defaultValue="Selecione Sua Sala" onChange={e => this.handleChange(e)} name="room" required>
+                                <select 
+                                className="form-control mb-3" 
+                                defaultValue="Selecione Sua Sala" 
+                                onChange={e => this.handleChange(e)} 
+                                name="room"
+                                value={this.state.room}
+                                >
                                     <option disabled>Selecione Sua Sala</option>
                                     <option>01</option>
                                     <option>02</option>
                                     <option>03</option>
                                 </select>
                                 <label htmlFor="exampleFormControlFile1">Imagem</label>
-                                <input type="file" className="form-control-file" onChange={e => this.handleImage(e)} />
+                                <input 
+                                type="file" 
+                                className="form-control-file" 
+                                onChange={e => this.handleImage(e)}
+                                />
                             </div>
                             <div className="col-12 mt-4 d-flex justify-content-end">
                                 <button className="btn bg-danger" type="reset">Cancelar</button>

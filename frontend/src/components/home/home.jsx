@@ -15,7 +15,6 @@ export default class Home extends Component {
         const response = await api.get("projects")
 
         this.setState({ projects: response.data })
-        console.log(response.data);
     }
 
     render() {
@@ -30,7 +29,7 @@ export default class Home extends Component {
                     <h2 className="mb-4 mt-4">Projetos Registrados: </h2>
                     <Carousel>
                             {this.state.projects.map(project => (
-                                <Carousel.Item>
+                                <Carousel.Item key={project._id}>
                                     <img
                                     className="d-block w-100"
                                     src={`http://localhost:4000/files/${project.image}`}
