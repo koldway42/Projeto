@@ -21,7 +21,7 @@ export default class Projects extends Component {
     render() {
         return (
             <Main>
-                <div className="container-fluid m-2 p-3">
+                <div className="container-fluid p-3">
                     <h2 id="projects-title" className="display-4">Projetos</h2>
                     <Accordion id="projects">
                         {this.state.projects.map((project) => (

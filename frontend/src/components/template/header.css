@@ -1,8 +1,14 @@
-header.header {
-    background: var(--white);
+header#header {
+    background: var(--dark);
     border-left: solid 1px #ddd;
     box-shadow: var(--shadow);
 }
+
+header#header a {
+    text-decoration: none;
+    transition: 0.5s;
+}
+
 
 @media(max-width: 720px) {
 

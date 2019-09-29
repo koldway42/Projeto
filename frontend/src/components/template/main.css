@@ -1,6 +1,6 @@
-main > div {
+#content > div {
     background: #fff;
-    box-shadow: 0 0 15px #0004;
     height: 100%;
     overflow-y: auto;
+    padding: 5% 10%;
 }

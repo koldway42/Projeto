@@ -5,7 +5,7 @@ import Main from "../template/main"
 export default props => {
     return (
         <Main>
-            <div className="container-fluid m-2 p-3">
+            <div className="container-fluid p-3">
                 <h1 className="display-4">Contato</h1>
                 <hr/>
                 <form className="row form-group m-3" action="">

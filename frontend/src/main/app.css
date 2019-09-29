@@ -13,9 +13,9 @@
         #f06543, 
         #f09d51) repeat scroll 0% 0%;
 
-    --header-height: 80px;
-    --footer-height: 60px;
-    --nav-width: 250px;
+    --header-height: 40px;
+    --footer-height: 40px;
+    --nav-width: 70px;
 
     --shadow: 
         0 2px 23px 0 rgba(0, 0, 0, 0.1),
@@ -31,52 +31,49 @@
     box-sizing: border-box;
     font-family: "Montserrat", sans-serif;
     overflow: hidden;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
 }
 
-.app {
+body, html {
     margin: 0;
-    height: 100vh;
-    display: grid;
-
-    grid-template-rows: 
-        var(--header-height)
-        1fr
-        var(--footer-height);
-
-    grid-template-columns: var(--nav-width) 1fr;
-
-    grid-template-areas: 
-        "logo header"
-        "nav content"
-        "footer content";
-
-    background: var(--light-gray);
+    padding: 0;
 }
 
-aside.logo {
-    grid-area: logo;
-}
-
-header.header {
-    grid-area: header;
-}
-
-main.content {
+#content {
+    height: 100%;
     grid-area: content;
 }
 
-aside.nav-menu {
-    grid-area: nav;
+header#header {
+    grid-area: header;
 }
 
-footer.footer {
-    grid-area: footer;
+#App {
+    background: #888;
+    height: 100vh;
+}
+
+#page-wrap {
+    height: 100%;
+    display: grid;
+    background: var(--light-gray);
+    grid-template-rows: var(--header-height) 1fr;
+    grid-template-columns: 1fr;
+    grid-template-areas: 
+        "header"
+        "content";
+    box-shadow: var(--shadow);
+}
+
+#page-wrap main {
+    padding: 0;
 }
 
 @media(max-width: 720px) {
 
-    .app {
-        grid-template-rows: 100px 50px 50px 1fr 40px;
+    #App {
+        grid-template-rows: 1fr;
 
         grid-template-columns: 1fr;
 
@@ -87,10 +84,6 @@ footer.footer {
             "content"
             "footer";
 
-    }
-
-    aside.logo {
-        background: #fff;
     }
 
 }

@@ -1,6 +1,5 @@
-import React, { Component, useState } from "react";
+import React, { Component } from "react";
 
-import Button from "react-bootstrap/Button"
 import Alert from 'react-bootstrap/Alert'
 import Main from "../template/main";
 import api from "../../services/api";
@@ -16,10 +15,8 @@ export default class extends Component {
         room: "Selecione Sua Sala",
     }
 
+    state = this.defaultState;
     
-
-    state = this.defaultState
-
     handleChange(e) {
         this.setState( {[e.target.name]: e.target.value } )
     }
@@ -28,10 +25,18 @@ export default class extends Component {
         this.setState({image: e.target.files[0] })
     }
 
+    scrollTop = () => {
+        document.getElementById("Register").scrollIntoView();
+    }
+
     async handleSubmit(e) {
         e.preventDefault();
-        const { title, description, image, room, group} = this.state
+        let { title, description, image, room, group} = this.state
         const data = new FormData();
+
+        if(room === "Selecione Sua Sala") {
+            room = "";
+        }
 
         data.append("title", title);
         data.append("description", description);
@@ -47,6 +52,7 @@ export default class extends Component {
                         status: "success",
                         ...this.defaultState
                     })
+                    this.scrollTop()
                 }
             })
             .catch(err => {
@@ -54,10 +60,11 @@ export default class extends Component {
                     message: err.response.data,
                     status: "error"
                 })
+                this.scrollTop()
             });
     }
 
-    AlertDanger(msg = "Teste", variant) {
+    AlertDanger(msg, variant) {
         return (
             <Alert variant={variant}>
                 {msg}
@@ -70,8 +77,8 @@ export default class extends Component {
 
         return (
             <Main>
-                <div className="container-fluid m-2 p-3">
-                    <h1 className="display-4">Registro</h1>
+                <div className="container-fluid p-3">
+                    <h1 className="display-4" id="Register">Registro</h1>
                     <hr/>
 
                     {
@@ -121,7 +128,6 @@ export default class extends Component {
                             <label htmlFor="exampleFormControlSelect1">Sala</label>
                                 <select 
                                 className="form-control mb-3" 
-                                defaultValue="Selecione Sua Sala" 
                                 onChange={e => this.handleChange(e)} 
                                 name="room"
                                 value={this.state.room}

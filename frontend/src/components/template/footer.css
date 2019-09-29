@@ -1,4 +1,4 @@
-footer.footer {
+footer#footer {
     background: var(--dark);
     display: flex;
     justify-content: center;
@@ -6,7 +6,7 @@ footer.footer {
     box-shadow: var(--shadow);
 }
 
-footer.footer span{
+footer#footer span{
     color: #fff;
     font-size: 0.8em
 }

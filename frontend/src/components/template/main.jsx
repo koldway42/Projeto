@@ -1,13 +1,15 @@
 import React from "react";
 
 import "./main.css"
-
+import Footer from "./footer"
 export default props => {
     return (
-        <main className="content container-fluid p-0 p-md-2">
-            <div className="p-md-3">
+        <main id="content" className="container-fluid">
+            <div>
                 {props.children}
             </div>
+            <Footer />
         </main>
+        
     )
 }

@@ -14,10 +14,12 @@ import Router from "./routes"
 export default props => {
     return (
         <HashRouter>
-            <div className="app">
-                <Header />
+            <div id="App">
                 <Aside />
-                <Router />
+                <div id="page-wrap">
+                    <Header />
+                    <Router />
+                </div>
             </div>
         </HashRouter>
     )

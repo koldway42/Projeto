@@ -9,7 +9,7 @@ import Contact from "../components/contact/contact"
 
 export default props => {
     return (
-        <Switch>
+        <Switch >
             <Route exact path="/" component={Home} />
             <Route path="/projects" component={Projects} />
             <Route path="/register" component={RegisterProject} />

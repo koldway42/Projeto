@@ -1,4 +1,4 @@
-aside.logo {
+#logo {
     background: var(--dark);
     display: flex;
     overflow: hidden;
@@ -6,7 +6,7 @@ aside.logo {
     align-items: center;
 }
 
-aside.logo a {
+#logo a {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -14,7 +14,7 @@ aside.logo a {
     color: #fff;
 }
 
-aside.logo img {
+#logo img {
     width: 40%;
     padding: 0 15px;
 }

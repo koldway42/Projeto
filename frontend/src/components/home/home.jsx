@@ -20,7 +20,7 @@ export default class Home extends Component {
     render() {
         return (
             <Main>
-                <div className="container-fluid m-2 p-3">
+                <div className="container-fluid p-3">
                     <h2 className="display-4">Bem Vindo!</h2>
                     <h4 className="mt-4">
                         Esta é a Página Inicial do Projeto.
@@ -80,6 +80,9 @@ export default class Home extends Component {
                             </li>
                             <li className="list-group-item d-flex justify-content-between" >
                                 Multer <span className="text-success" > v1.4 </span>
+                            </li>
+                            <li className="list-group-item d-flex justify-content-between" >
+                                React Burger Menu <span className="text-success" > v2.6 </span>
                             </li>
                         </ul>
                     </div>
