@@ -4,18 +4,29 @@ const sharp = require("sharp");
 const path = require("path");
 const fs = require("fs");
 
-const { existsOrError } = validations;
+const { 
+    existsOrError,
+    EqualsOrError
+ } = validations;
 
 module.exports = {
 
+    async reset(req, resp, next) {
+        await Publication.remove( {__v: 0} );
+
+        resp.send("<h2> Reset realizado </h2>");
+
+        next()
+    },
+
     async index(req, resp) {
-        const publications = await Publication.find().sort("-createdAt")
+        const publications = await Publication.find();
 
         return resp.json(publications)
     },
 
     async store(req, resp) {
-        const { title, description, group, room } = req.body;
+        const { title, description, group, room, passwd } = req.body;
 
         try {
             existsOrError(title, "Nome de Projeto Inválido");
@@ -23,6 +34,7 @@ module.exports = {
             existsOrError(description, "Descricão inválida");
             existsOrError(room, "Sala inválida");
             existsOrError(req.file, "Imagem não encontrada");
+            EqualsOrError(passwd, "110374", "A senha de Administrador não confere.")
         } catch(err) {
             return resp.status(400).send(err.message)
         }

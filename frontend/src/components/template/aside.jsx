@@ -6,39 +6,11 @@ import "./logo.css"
 
 export default class aside extends Component {
 
-    handleActive(e) {
-        let items =  document.getElementsByClassName("menu-item");
-        items = [...items]
-        items.map(item => {
-            if(item.href === e.target.href) {
-                item.id = "active";
-            } else {
-                item.id = ""
-            }
-        })
-    }
-
-    handleFirstActive() {
-        const url = window.location.href;
-        console.log(window.location.href)
-        let items =  document.getElementsByClassName("menu-item");
-        items = [...items]
-        items.map(item => {
-            if(item.href === url) {
-                item.id = "active";
-            }
-        })
-    }
-
-    componentDidMount() {
-        this.handleFirstActive()
-    }
-
     render() {
         const Menu = BurgerMenu["scaleRotate"]
         return (
             <Menu id="scaleRotate" pageWrapId={"page-wrap"} outerContainerId={"App"}>
-                <div id="logo" onClick={e => this.handleActive(e)}>
+                <div id="logo">
                     <a href="#/">
                         <img src={logo} alt="Aiki"/>
                         <h1 className="mr-3 ml-0">
@@ -47,14 +19,20 @@ export default class aside extends Component {
                     </a>
                 </div>
                 
-                <a href="#/" onClick={e => this.handleActive(e) } className="menu-item">
-                    <i className={`fa fa-home`}></i> Início
+                <a href="#/" className="menu-item">
+                    <i className={`fa fa-lg fa-home mr-2`}></i> Início
                 </a>
-                <a href="#/projects" onClick={e => this.handleActive(e) } className="menu-item">
-                    <i className={`fa fa-clipboard`}></i> Projetos
+                <a href="#/documentation" className="menu-item">
+                    <i className={`fa fa-lg fa-book mr-2`}></i> Documentação
                 </a>
-                <a href="#/contact" onClick={e => this.handleActive(e) } className="menu-item">
-                    <i className={`fa fa-phone-square`}></i> Contato
+                <a href="#/projects" className="menu-item">
+                    <i className={`fa fa-lg fa-clipboard mr-2`}></i> Projetos
+                </a>
+                <a href="#/visitors" className="menu-item">
+                    <i className={`fa fa-lg fa-list-alt mr-2`}></i> Visitas
+                </a>
+                <a href="#/contact" className="menu-item">
+                    <i className={`fa fa-lg fa-phone-square mr-2`}></i> Contato
                 </a>
             </Menu>
         );

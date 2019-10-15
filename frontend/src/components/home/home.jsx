@@ -36,56 +36,11 @@ export default class Home extends Component {
                                     alt={project.title}
                                     />
                                     <Carousel.Caption>
-                                        <h3>{project.title}</h3>
+                                        <h3 >{project.title}</h3>
                                     </Carousel.Caption>
                                 </Carousel.Item>
                             ))}
                     </Carousel>
-                    <hr/>
-                    <h2 className="mb-4 mt-4">Documentação: </h2>
-                    <div className="card p-4 bg-dark">
-                        <h5 className="p-4 text-white">
-                            Ferramentas Utilizadas:
-                        </h5>
-                        <ul className="tools-home list-group">
-                            <li className="list-group-item d-flex justify-content-between" >
-                                NodeJS <span className="text-success" > v11.15 </span> 
-                            </li>
-                            <li className="list-group-item d-flex justify-content-between" >
-                                ReactJS <span className="text-success" > v16.8 </span> 
-                            </li>
-                            <li className="list-group-item d-flex justify-content-between" >
-                                Axios <span className="text-success" > v0.19 </span> 
-                            </li>
-                            <li className="list-group-item d-flex justify-content-between" >
-                                Booststrap <span className="text-success" > v4.3 </span>
-                            </li>
-                            <li className="list-group-item d-flex justify-content-between" >
-                                React Booststrap <span className="text-success" > v1.0 Beta.10 </span>
-                            </li>
-                            <li className="list-group-item d-flex justify-content-between" >
-                                Font-Awesome <span className="text-success" > v4.7 </span>
-                            </li>
-                            <li className="list-group-item d-flex justify-content-between" >
-                                ExpressJS <span className="text-success" > v4.17 </span>
-                            </li>
-                            <li className="list-group-item d-flex justify-content-between" >
-                                Pm2 <span className="text-success" > v3.5 </span>
-                            </li>
-                            <li className="list-group-item d-flex justify-content-between" >
-                                CORS <span className="text-success" > v2.8 </span>
-                            </li>
-                            <li className="list-group-item d-flex justify-content-between" >
-                                Body-parser <span className="text-success" > v1.19 </span>
-                            </li>
-                            <li className="list-group-item d-flex justify-content-between" >
-                                Multer <span className="text-success" > v1.4 </span>
-                            </li>
-                            <li className="list-group-item d-flex justify-content-between" >
-                                React Burger Menu <span className="text-success" > v2.6 </span>
-                            </li>
-                        </ul>
-                    </div>
                 </div>
             </Main>
         )

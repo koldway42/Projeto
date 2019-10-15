@@ -1,0 +1,10 @@
+#Documentation p {
+    text-indent: 40px;
+    line-height: 35px;
+    text-align: justify;
+    margin-bottom: 25px;
+}
+
+#Documentation h2 {
+    margin: 50px 0;
+}

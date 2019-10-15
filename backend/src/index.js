@@ -5,6 +5,9 @@ const mongoose = require("mongoose");
 
 const app = express();
 
+const server = require('http').createServer(app);
+const io = require("socket.io")(server);
+
 consign()
     .include("src/config/middlewares.js")
     .then("src/controllers")
@@ -14,6 +17,10 @@ mongoose.connect("mongodb://127.0.0.1:27017/projeto_at", { useNewUrlParser: true
 
 const port = 4000;
 
-app.listen(port, () => {
+io.on("connection", socket => {
+    console.log("Socket conectado: " + socket.id);
+})
+
+server.listen(port, () => {
     console.log(`Executando na porta ${port}`)
 }) 

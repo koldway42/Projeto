@@ -13,6 +13,7 @@ export default class extends Component {
         image: null,
         group: "",
         room: "Selecione Sua Sala",
+        passwd: ""
     }
 
     state = this.defaultState;
@@ -31,7 +32,7 @@ export default class extends Component {
 
     async handleSubmit(e) {
         e.preventDefault();
-        let { title, description, image, room, group} = this.state
+        let { title, description, image, room, group, passwd} = this.state
         const data = new FormData();
 
         if(room === "Selecione Sua Sala") {
@@ -43,12 +44,13 @@ export default class extends Component {
         data.append("image", image);
         data.append("room", room);
         data.append("group", group);
+        data.append("passwd", passwd);
 
         await api.post("/projects", data, {})
             .then(resp => {
                 if(resp.status >= 200 && resp.status < 300) {
                     this.setState({
-                        message: "Projeto cadastrado Com sucesso!",
+                        message: "Projeto cadastrado com sucesso!",
                         status: "success",
                         ...this.defaultState
                     })
@@ -142,6 +144,17 @@ export default class extends Component {
                                 type="file" 
                                 className="form-control-file" 
                                 onChange={e => this.handleImage(e)}
+                                />
+                            </div>
+                            <div className="col-6 mt-3 mb-4">
+                                <label htmlFor="senha-admin">Senha de Administrador</label>
+                                <input type="password"
+                                onChange={e => this.handleChange(e)} 
+                                id="senha-admin" 
+                                className="form-control"
+                                name="passwd"
+                                placeholder="Digite a senha do Aministrador..."
+                                value={this.state.passwd}
                                 />
                             </div>
                             <div className="col-12 mt-4 d-flex justify-content-end">

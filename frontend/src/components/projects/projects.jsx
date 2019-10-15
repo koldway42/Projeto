@@ -41,7 +41,7 @@ export default class Projects extends Component {
                                             </div>
                                             <img src={`http://localhost:4000/files/${project.image}`} alt=""/>
                                         </aside>
-                                        <footer className="project-description">
+                                        <footer className="mb-5 project-description">
                                             <h3>Descrição</h3>
                                             <p>
                                                 {project.description}

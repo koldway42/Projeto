@@ -13,7 +13,7 @@
 
 /* Color/shape of burger icon bars on hover*/
 .bm-burger-bars-hover {
-  background: #555;
+  background: #aaaaaa;
   transition: 0.5s;
 }
 
@@ -25,7 +25,7 @@
 
 /* Color/shape of close button cross */
 .bm-cross {
-  background: #bdc3c7;
+  background: #fff;
 }
 
 /*
@@ -53,7 +53,7 @@ Note: Beware of modifying this element as it can break the animations - you shou
 /* Wrapper for item list */
 .bm-item-list {
   color: #b8b7ad;
-  padding: 0.8em;
+  padding: 0;
   margin: 0;
 }
 
@@ -63,7 +63,7 @@ Note: Beware of modifying this element as it can break the animations - you shou
   text-decoration: none;
   color: #fff;
   padding: 16px;
-  border: none;
+  border-bottom: 1px solid #444;
   margin: 0;
   outline: none;
 }
