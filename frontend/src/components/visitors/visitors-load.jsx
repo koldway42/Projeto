@@ -8,10 +8,18 @@ export default class visitors extends Component {
         visitors: []
     }
 
-    async componentDidMount() {
+    async LoadVisitors() {
         const response = await api.get("/visitors")
 
         this.setState({ visitors: response.data })
+    }
+
+    componentDidMount() {
+        this.LoadVisitors();
+    }
+
+    componentDidUpdate() {
+        this.LoadVisitors();
     }
 
     render() {

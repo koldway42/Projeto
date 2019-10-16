@@ -106,7 +106,7 @@ export default class visitors extends Component {
                   />
                   </div>
                   <div className="col-2 mt-3 mb-2">
-                    <label >Nota</label>
+                    <label >Avaliação</label>
                     <select 
                     className="form-control mb-3" 
                     onChange={e => this.handleChange(e)} 
@@ -114,11 +114,11 @@ export default class visitors extends Component {
                     value={this.state.rating}
                     >
                         <option disabled>Selecione</option>
-                        <option>1</option>
-                        <option>2</option>
-                        <option>3</option>
-                        <option>4</option>
-                        <option>5</option>
+                        <option>Péssimo</option>
+                        <option>Ruim</option>
+                        <option>Mediano</option>
+                        <option>Bom</option>
+                        <option>Ótimo</option>
                     </select>
                   </div>
                 </div>
