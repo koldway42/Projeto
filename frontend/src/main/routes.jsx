@@ -17,7 +17,7 @@ export default props => {
             <Route path="/register" component={RegisterProject} />
             <Route path="/contact" component={Contact}/>
             <Route path="/documentation" component={Documentation}/>
-            <Route path="/visitors" component={Visitors}/>
+            <Route path="/feedback" component={Visitors}/>
             <Redirect from="*" to="/" />
         </Switch>
     )

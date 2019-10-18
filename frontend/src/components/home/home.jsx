@@ -3,7 +3,6 @@ import Carousel from 'react-bootstrap/Carousel'
 
 import Main from "../template/main"
 import api from "../../services/api"
-import Graph from "../template/deps/PieGraph"
 
 import "../home/home.css"
 
@@ -43,7 +42,6 @@ export default class Home extends Component {
                             ))}
                     </Carousel>
                     <hr/>
-                    <Graph />
                 </div>
             </Main>
         )

@@ -44,11 +44,12 @@ export default class visitors extends Component {
         .then(resp => {
             if(resp.status >= 200 && resp.status < 300) {
                 this.setState({
-                    message: "Visita cadastrada com sucesso!",
+                    message: "Visita cadastrada com sucesso! A página será recarregada em 3 segundos.",
                     status: "success",
                     ...this.defaultState
                 })
                 this.scrollTop()
+                setTimeout(window.location.reload(), 3000);
             }
         })
         .catch(err => {
@@ -73,7 +74,7 @@ export default class visitors extends Component {
     return (
         <Main>
             <div className="container-fluid p-3">
-              <h2 className="display-4" id="Visits">Visitas</h2>
+              <h2 className="display-4" id="Visits">Feedback</h2>
               <hr/>
               {
                 this.state.status === "error" ? 

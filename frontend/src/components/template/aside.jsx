@@ -28,8 +28,8 @@ export default class aside extends Component {
                 <a href="#/projects" className="menu-item">
                     <i className={`fa fa-lg fa-clipboard mr-2`}></i> Projetos
                 </a>
-                <a href="#/visitors" className="menu-item">
-                    <i className={`fa fa-lg fa-list-alt mr-2`}></i> Visitas
+                <a href="#/feedback" className="menu-item">
+                    <i className={`fa fa-lg fa-list-alt mr-2`}></i> Feedback
                 </a>
                 <a href="#/contact" className="menu-item">
                     <i className={`fa fa-lg fa-phone-square mr-2`}></i> Contato

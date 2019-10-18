@@ -59,6 +59,9 @@ export default class Home extends Component {
                             <li className="list-group-item d-flex justify-content-between" >
                                 React Burger Menu <span className="text-success" > v2.6 </span>
                             </li>
+                            <li className="list-group-item d-flex justify-content-between" >
+                                Victory <span className="text-success" > v33.1 </span>
+                            </li>
                         </ul>
                     </div>
                     <hr/>

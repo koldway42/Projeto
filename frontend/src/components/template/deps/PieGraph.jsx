@@ -2,33 +2,36 @@ import React, { Component } from 'react'
 import * as V from "victory";
 import api from "../../../services/api"
 
-import "./PieGraph.css"
-
-const VictoryBar = V.VictoryBar;
-const VictoryChart = V.VictoryChart;
+const VictoryPie = V.VictoryPie;
 const VictoryContainer = V.VictoryContainer;
+const VictoryLabel = V.VictoryLabel;
+const VictoryTheme = V.VictoryTheme;
 
-export default class PieGraph extends Component {
-
-    state = {
+    const defaultState = {
         ratings: [
-            {x: "Péssimo", y: 0},
-            {x: "Ruim", y: 0},
-            {x: "Mediano", y: 0},
-            {x: "Bom", y: 0},
-            {x: "Ótimo", y: 0}
+            {x: "Péssimo", y: 0, label: null},
+            {x: "Ruim", y: 0, label: null},
+            {x: "Mediano", y: 0, label: null},
+            {x: "Bom", y: 0, label: null},
+            {x: "Otimo", y: 0, label: null}
         ],
         TotalRatings: 0,
-        HigestRatingCount: 0
     }
+export default class PieGraph extends Component {
+
+    state = defaultState;
 
     async componentDidMount() {
+        this.state = defaultState;
+
         const response = await api.get("/visitors")
+    
+        let TotalRatings = 0
 
         const visitors = response.data;
         visitors.map(item => {
             let rating = item.rating;
-
+    
             switch(rating) {
                 case "Péssimo":
                     this.state.ratings[0].y++;
@@ -46,11 +49,22 @@ export default class PieGraph extends Component {
                     this.state.ratings[4].y++;
                     break;
                 default:
-                    alert("Erro");
+                    console.log("Não há projetos registrados.");
             }
-            this.state.TotalRatings++
+            TotalRatings++
         })
 
+        this.state.TotalRatings = TotalRatings;
+
+        const ratings = [];
+        this.state.ratings.forEach((item, index, array ) => {
+            if(item.y > 0) {
+                item.label = item.x + " " + ((100 * item.y) / this.state.TotalRatings).toFixed(1) + "%"; 
+                ratings.push(item)
+            }
+            console.log(array)
+        })
+        this.setState( {ratings} )
     }
 
     render() {
@@ -68,35 +82,35 @@ export default class PieGraph extends Component {
         })
         
 
-        return (
-            
-            <React.Fragment>
+        return (   
+            <div className="mx-auto d-block p-3">
                 <h2>Feedback de Usuário</h2>
                 <hr/>
+                <h3>Total de avaliações: {this.state.TotalRatings}</h3>
                 {runGraph ?
                     <div id="RatingGraph">
-                            <VictoryChart
-                                theme={V.VictoryTheme.material}
-                                domainPadding={15}
-                                height={150}
-                                padding={{top: 10, bottom: 30, left: 80, right: 120}}
-                                animate={animation}
-                            >
-                                <VictoryBar 
-                                    data={data} 
-                                    horizontal={true}
-                                    domain={{
-                                        x: [1, 5]
-                                    }}
-                                    style={{
-                                        data: {fill: "#f06543"},
-                                        labels: {fill: "#333"}
-                                    }}
-                                />
-                            </VictoryChart>
+                            <VictoryPie 
+                                data={data}
+                                theme={VictoryTheme.material}
+                                labelComponent={<VictoryLabel
+                                     
+                                    />}
+                                width={500}
+                                height={500}
+                                padding={{
+                                    top: 10,
+                                    bottom: 10,
+                                    left: 100,
+                                    right: 110
+                                }}
+                                containerComponent={<VictoryContainer   
+                                    responsive={false}
+                                    animate={animation}
+                                    />}
+                            />
                     </div>
                 : <h3><strong> Sem avaliacões </strong></h3>}
-            </React.Fragment>
+            </div>
         )
     }
 }
