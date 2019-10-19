@@ -6,7 +6,8 @@ const publicationSchema = new Schema({
     image: String,
     description: String,
     group: String,
-    room: String
+    room: String,
+    category: String
 }, {
     timestamps: true
 })

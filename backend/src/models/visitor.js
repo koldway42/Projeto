@@ -4,7 +4,10 @@ const Schema = mongoose.Schema;
 const visitorSchema = new Schema({
     name: String,
     email: String,
-    rating: String
+    rating: String,
+    opinion: String,
+    favoriteMathProj: String,
+    favoriteBiomeProj: String
 }, {
     timestamps: true
 })

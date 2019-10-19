@@ -8,6 +8,7 @@ import RegisterProject from "../components/register-project/register-project"
 import Contact from "../components/contact/contact"
 import Documentation from "../components/documentation/documentation"
 import Visitors from "../components/visitors/visitors"
+import Statistics from "../components/statistics/statistics"
 
 export default props => {
     return (
@@ -18,6 +19,7 @@ export default props => {
             <Route path="/contact" component={Contact}/>
             <Route path="/documentation" component={Documentation}/>
             <Route path="/feedback" component={Visitors}/>
+            <Route path="/statistics" component={Statistics}/>
             <Redirect from="*" to="/" />
         </Switch>
     )

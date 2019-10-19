@@ -12,11 +12,29 @@ export default class visitors extends Component {
   state = {
     name: "",
     email: "",
-    rating: "Selecione"
+    rating: "Selecione",
+    opinion: "",
+    favoriteBiomeProj: "Selecione",
+    favoriteMathProj: "Selecione",
+    projects: []
+  }
+
+  async componentDidMount() {
+    const response = await api.get("projects")
+
+    this.setState( {projects: response.data} )
   }
 
   handleChange(e) {
     this.setState( {[e.target.name]: e.target.value } )
+  }
+
+  transformToEmpty(item) {
+    if(item === "Selecione") {
+      return ""
+    } else {
+      return item;
+    }
   }
 
   scrollTop = () => {
@@ -25,21 +43,26 @@ export default class visitors extends Component {
 
   async handleSubmit(e) {
     e.preventDefault();
-    let { name, email, rating } = this.state
-    const data = new FormData();
+    let { 
+      name,
+      email,
+      rating,
+      opinion,
+      favoriteBiomeProj,
+      favoriteMathProj
+    } = this.state
 
-    if(rating === "Selecione") {
-        rating = "";
-    }
-
-    data.append("name", name);
-    data.append("email", email);
-    data.append("rating", rating);
+    opinion = this.transformToEmpty(opinion);
+    favoriteBiomeProj = this.transformToEmpty(favoriteBiomeProj);
+    favoriteMathProj = this.transformToEmpty(favoriteMathProj);
 
     await api.post("/visitors", {
       name,
       email,
-      rating
+      rating,
+      opinion,
+      favoriteBiomeProj,
+      favoriteMathProj
     }, {})
         .then(resp => {
             if(resp.status >= 200 && resp.status < 300) {
@@ -122,6 +145,47 @@ export default class visitors extends Component {
                         <option>Ótimo</option>
                     </select>
                   </div>
+                  <div className="col-12 mb-4">
+                      <label htmlFor="opinion-visitor">Opinião(Opcional)</label>
+                      <textarea 
+                      id="opinion-visitor" 
+                      onChange={e => this.handleChange(e)} 
+                      className="form-control"
+                      name="opinion" 
+                      placeholder="Digite sua opinião sobre esse projeto..." 
+                      rows="3"
+                      value={this.state.opinion}
+                      />
+                  </div>
+                </div>
+                <div className="col-4 mt-3 mb-2">
+                  <label >Projeto mais apreciado(Biomas)</label>
+                  <select 
+                  className="form-control mb-3" 
+                  onChange={e => this.handleChange(e)} 
+                  name="favoriteBiomeProj"
+                  value={this.state.favoriteBiomeProj}
+                  >
+                      <option disabled>Selecione</option>
+                      {this.state.projects.filter(item => item.category === "Biomas").map(item => (
+                        <option>{item.title}</option>
+                      ))}
+                      
+                  </select>
+                </div>
+                <div className="col-4 mt-3 mb-2">
+                  <label >Projeto mais apreciado(Tecnológico)</label>
+                  <select 
+                  className="form-control mb-3" 
+                  onChange={e => this.handleChange(e)} 
+                  name="favoriteMathProj"
+                  value={this.state.favoriteMathProj}
+                  >
+                      <option disabled>Selecione</option>
+                      {this.state.projects.filter(item => item.category === "Tecnológico").map(item => (
+                        <option>{item.title}</option>
+                      ))}
+                  </select>
                 </div>
               <div className="col-12 mt-4 d-flex justify-content-end">
                   <button className="btn bg-danger" type="reset">Cancelar</button>

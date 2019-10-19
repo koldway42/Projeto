@@ -12,6 +12,7 @@ export default class extends Component {
         description: "",
         image: null,
         group: "",
+        category: "Selecione a categoria do Projeto",
         room: "Selecione Sua Sala",
         passwd: ""
     }
@@ -32,7 +33,7 @@ export default class extends Component {
 
     async handleSubmit(e) {
         e.preventDefault();
-        let { title, description, image, room, group, passwd} = this.state
+        let { title, description, image, room, group, passwd, category} = this.state
         const data = new FormData();
 
         if(room === "Selecione Sua Sala") {
@@ -42,6 +43,7 @@ export default class extends Component {
         data.append("title", title);
         data.append("description", description);
         data.append("image", image);
+        data.append("category", category);
         data.append("room", room);
         data.append("group", group);
         data.append("passwd", passwd);
@@ -127,7 +129,18 @@ export default class extends Component {
                                 />
                             </div>
                             <div className="form-group col-12 mb-4">
-                            <label htmlFor="exampleFormControlSelect1">Sala</label>
+                            <label htmlFor="TypeSelector">Categoria</label>
+                                <select 
+                                className="form-control mb-3" 
+                                onChange={e => this.handleChange(e)} 
+                                name="category"
+                                value={this.state.category}
+                                >
+                                    <option disabled>Selecione a categoria do Projeto</option>
+                                    <option>Biomas</option>
+                                    <option>Tecnológico</option>
+                                </select>
+                            <label htmlFor="RoomSelector">Sala</label>
                                 <select 
                                 className="form-control mb-3" 
                                 onChange={e => this.handleChange(e)} 

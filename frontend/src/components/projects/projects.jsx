@@ -38,6 +38,7 @@ export default class Projects extends Component {
                                                 <h2>{project.title}</h2>
                                                 <p><strong>Grupo: </strong> {project.group}</p>
                                                 <p><strong>Sala: </strong> 3° {project.room}</p>
+                                                <p><strong>Categoria: </strong>{project.category}</p>
                                             </div>
                                             <img src={`http://localhost:4000/files/${project.image}`} alt=""/>
                                         </aside>

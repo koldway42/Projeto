@@ -3,7 +3,7 @@ import {HashRouter} from "react-router-dom"
 
 import "bootstrap/dist/css/bootstrap.min.css"
 import "react-bootstrap/dist/react-bootstrap.min.js"
-import "font-awesome/css/font-awesome.min.css"
+import "@fortawesome/fontawesome-free/css/all.min.css"
 
 import "./app.css"
 

@@ -26,13 +26,14 @@ module.exports = {
     },
 
     async store(req, resp) {
-        const { title, description, group, room, passwd } = req.body;
+        const { title, description, group, room, passwd, category } = req.body;
 
         try {
             existsOrError(title, "Nome de Projeto Inválido");
             existsOrError(group, "Grupo Inválido");
             existsOrError(description, "Descricão inválida");
             existsOrError(room, "Sala inválida");
+            existsOrError(category, "Categoria de Projeto não selecionada");
             existsOrError(req.file, "Imagem não encontrada");
             EqualsOrError(passwd, "110374", "A senha de Administrador não confere.")
         } catch(err) {
@@ -56,7 +57,8 @@ module.exports = {
             image: filename,
             description,
             group,
-            room
+            room,
+            category
         });
 
         return resp.json(publication);

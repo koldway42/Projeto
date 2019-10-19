@@ -10,13 +10,7 @@ const VictoryTheme = V.VictoryTheme;
 export default class PieGraph extends Component {
 
     defaultState = {
-        ratings: [
-            {x: "Péssimo", y: 0, label: null},
-            {x: "Ruim", y: 0, label: null},
-            {x: "Mediano", y: 0, label: null},
-            {x: "Bom", y: 0, label: null},
-            {x: "Otimo", y: 0, label: null}
-        ],
+        ratings: [],
         TotalRatings: 0,
     }
 
@@ -27,37 +21,32 @@ export default class PieGraph extends Component {
 
         let response = await api.get("/visitors")
     
-        let TotalRatings = 0
+        let TotalRatings = response.data.length;
 
         const visitors = response.data;
-        visitors.map(item => {
-            let rating = item.rating;
-    
-            switch(rating) {
-                case "Péssimo":
-                    this.state.ratings[0].y++;
-                    break;
-                case "Ruim":
-                    this.state.ratings[1].y++;
-                    break;
-                case "Mediano":
-                    this.state.ratings[2].y++;
-                    break;
-                case "Bom":
-                    this.state.ratings[3].y++;
-                    break;
-                case "Ótimo":
-                    this.state.ratings[4].y++;
-                    break;
-                default:
-                    console.log("Não há projetos registrados.");
+        visitors.forEach(item => {
+            const obj = {
+                x: item.favoriteBiomeProj,
+                y: 0,
+                label: item.favoriteBiomeProj,
             }
-            TotalRatings++
+            if(!(this.state.ratings.find(el => el.x === obj.x))) {
+                this.state.ratings.push(obj)
+            }
         })
 
-        console.log(this.state)
+        console.log(this.state.ratings);
+
+        this.state.ratings.forEach((item, index) => {
+            visitors.map(e => {
+                if(item.x === e.favoriteBiomeProj) {
+                    this.state.ratings[index].y++;
+                }
+            })
+        })
 
         this.state.TotalRatings = TotalRatings;
+
         const ratings = [];
         this.state.ratings.forEach((item, index, array ) => {
             if(item.y > 0) {
@@ -65,6 +54,9 @@ export default class PieGraph extends Component {
                 ratings.push(item)
             }
         })
+
+        console.log(ratings);
+
         this.setState( {ratings} );
     }
 
@@ -85,9 +77,7 @@ export default class PieGraph extends Component {
 
         return (   
             <div className="mx-auto d-block p-3">
-                <h2>Feedback de Usuário(AIKI)</h2>
-                <hr/>
-                <h3>Total de avaliações: {this.state.TotalRatings}</h3>
+                <h2>Ranking(Projetos Tecnológicos)</h2>
                 {runGraph ?
                     <div id="RatingGraph">
                             <VictoryPie 
@@ -97,14 +87,14 @@ export default class PieGraph extends Component {
                                      
                                     />}
                                 width={500}
-                                style={{
-                                    labels:{fontSize: 6}
-                                }}
                                 padding={{
                                     top: 0,
                                     bottom: 0,
                                     left: 150,
                                     right: 150
+                                }}
+                                style={{
+                                    labels:{fontSize: 6}
                                 }}
                                 containerComponent={<VictoryContainer   
                                     responsive={true}

@@ -24,13 +24,23 @@ module.exports = {
     },
 
     async store(req, resp) {
-        const { name, email, rating } = req.body;
+        const { 
+            name,
+            email,
+            rating,
+            opinion,
+            favoriteMathProj,
+            favoriteBiomeProj
+        } = req.body;
 
         try {
             existsOrError(name, "Nome não informado.");
             existsOrError(email, "Email não informado.");
             existsOrError(rating, "Avaliação não informada.");
             emailOrError(email, "Email inválido.");
+
+            existsOrError(favoriteBiomeProj, "Projeto(Biomas) favorito não informado.");
+            existsOrError(favoriteMathProj, "Projeto(Tecnológico) favorito não informado.");
 
             const existentEmail = await Visitor.findOne({ email });
             notExistsOrError(existentEmail, "O email já foi registrado");
@@ -42,12 +52,13 @@ module.exports = {
         const visitor = await Visitor.create({
             name,
             email,
-            rating
+            rating,
+            opinion,
+            favoriteMathProj,
+            favoriteBiomeProj,
         })
 
         return resp.json(visitor);
     }
-
-
-
+    
 }
