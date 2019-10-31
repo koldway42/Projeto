@@ -77,7 +77,7 @@ export default class PieGraph extends Component {
 
         return (   
             <div className="mx-auto d-block p-3">
-                <h2>Ranking(Projetos Tecnológicos)</h2>
+                <h2>Ranking(Biomas)</h2>
                 {runGraph ?
                     <div id="RatingGraph">
                             <VictoryPie 

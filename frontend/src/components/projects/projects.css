@@ -42,6 +42,25 @@ footer.project-description h3 {
     font-weight: 300;
 }
 
+div#projects-filter {
+    margin: 0 auto;
+    height: 2%;
+    margin-bottom: 5px;
+    padding: 16px;
+    background: #eee;
+    border-radius: 4px;
+    border: solid 1px #ccc;
+}
+
+div#projects-filter ul li{
+    display: inline;
+    margin: auto 10px;
+    cursor: pointer;
+}
+
+div#projects-filter ul li:hover{
+    color: #555;
+}
 
 #projects {
     box-shadow: 
