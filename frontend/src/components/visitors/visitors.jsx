@@ -167,8 +167,9 @@ export default class visitors extends Component {
                   value={this.state.favoriteBiomeProj}
                   >
                       <option disabled>Selecione</option>
-                      {this.state.projects.filter(item => item.category === "Biomas").map(item => (
-                        <option>{item.title}</option>
+                      {this.state.projects.filter(item => item.category === "Biomas")
+                      .map((item, index) => (
+                        <option key={index}>{item.title}</option>
                       ))}
                       
                   </select>
@@ -182,8 +183,9 @@ export default class visitors extends Component {
                   value={this.state.favoriteMathProj}
                   >
                       <option disabled>Selecione</option>
-                      {this.state.projects.filter(item => item.category === "Tecnológico").map(item => (
-                        <option>{item.title}</option>
+                      {this.state.projects.filter(item => item.category === "Tecnológico")
+                      .map((item, index) => (
+                        <option key={index}>{item.title}</option>
                       ))}
                   </select>
                 </div>

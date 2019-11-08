@@ -35,10 +35,8 @@ export default class PieGraph extends Component {
             }
         })
 
-        console.log(this.state.ratings);
-
         this.state.ratings.forEach((item, index) => {
-            visitors.map(e => {
+            visitors.forEach(e => {
                 if(item.x === e.favoriteBiomeProj) {
                     this.state.ratings[index].y++;
                 }
@@ -55,8 +53,6 @@ export default class PieGraph extends Component {
             }
         })
 
-        console.log(ratings);
-
         this.setState( {ratings} );
     }
 
@@ -68,7 +64,7 @@ export default class PieGraph extends Component {
 
         let runGraph = false;
 
-        this.state.ratings.map(item => {
+        this.state.ratings.forEach(item => {
             if(item.y > 0) {
                 runGraph = true;
             }

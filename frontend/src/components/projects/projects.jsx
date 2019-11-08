@@ -1,7 +1,4 @@
 import React, {Component} from "react"
-import Accordion from 'react-bootstrap/Accordion'
-import Card from 'react-bootstrap/Card'
-import Button from "react-bootstrap/Button"
 
 import api from "../../services/api";
 import Main from "../template/main";
@@ -10,6 +7,7 @@ import "./projects.css";
 export default class Projects extends Component {
     state = {
         projects: [],
+        visitors: [],
         filters: {
             category: "Todos",
             room: "Todos"
@@ -30,13 +28,16 @@ export default class Projects extends Component {
 
 
     async componentDidMount() {
-        const response = await api.get("projects")
+        const projects = await api.get("projects");
+        const visitors = await api.get("visitors")
 
-        this.setState( {projects: response.data} )
+        this.setState( {
+            projects: projects.data,
+            visitors: visitors.data
+        } )
     }
 
     unique = (value, index, self) => {
-        console.log(this.state.filters)
         return self.indexOf(value) === index
     }
       
@@ -62,14 +63,14 @@ export default class Projects extends Component {
                                             .map(item => item.category)
                                             .filter(this.unique)
                                             .sort()
-                                            .map(item => (
-                                                <option>{item}</option>
+                                            .map((item, index) => (
+                                                <option key={index}>{item}</option>
                                             ))}
                                             
                                         </select>
                                     </div>
                                     <div className="col-2 mt-3 mb-2">
-                                        <label >Ano</label>
+                                        <label >Sala</label>
                                         <select 
                                         className="form-control mb-3" 
                                         onChange={e => this.handleRoomChange(e)} 
@@ -81,62 +82,68 @@ export default class Projects extends Component {
                                             .map(item => item.room)
                                             .filter(this.unique)
                                             .sort()
-                                            .map(item => (
-                                            <option>{item}</option>
+                                            .map((item, index) => (
+                                            <option key={index}>{item}</option>
                                         ))}
                                             
                                         </select>
                                     </div>
                             </div>
                     </div>
-                    <Accordion id="projects">
                         {this.state.projects
                         .filter(item => {
                             let Corresponds = true;
                             for(let el in this.state.filters) {
-                                console.log(el)
                                 let value = this.state.filters[el];
-                                console.log(value)
                                 let exists = Object.values(item).indexOf(value) === -1;
-                                console.log(exists)
                                 if(value !== "Todos" && exists) {
                                     Corresponds = false;
                                 }
                             }
-                            if(Corresponds) {
-                                return item;
-                            }
+                            return Corresponds;
                         })
                         .map((project) => (
-                            <Card key={project._id} className="">
-                                <Card.Header>
-                                    <Accordion.Toggle className="text-dark" as={Button} variant="link" eventKey={project._id}>
-                                        {project.title}
-                                    </Accordion.Toggle>
-                                </Card.Header>
-                                <Accordion.Collapse eventKey={project._id}>
-                                    <Card.Body>
-                                        <aside className="project-body" >
-                                            <div className="info-group">
-                                                <h2>{project.title}</h2>
-                                                <p><strong>Grupo: </strong> {project.group}</p>
-                                                <p><strong>Sala: </strong> 3° {project.room}</p>
-                                                <p><strong>Categoria: </strong>{project.category}</p>
-                                            </div>
-                                            <img src={`http://localhost:4000/files/${project.image}`} alt=""/>
-                                        </aside>
-                                        <footer className="mb-5 project-description">
-                                            <h3>Descrição</h3>
+                            <div className="project" key={project._id}>
+                                <div className="project-header">
+                                    <div>
+                                        <h5>{project.title}</h5>
+                                        <p className="ml-3 ratings">
+                                            <i class="far fa-heart fa-xs text-danger"> </i>
+                                            {
+                                                " " +
+                                                this.state.visitors
+                                                .filter(item => {
+                                                    if(project.category === "Biomas") {
+                                                        return item.favoriteBiomeProj === project.title;
+                                                    } else {
+                                                        return item.favoriteMathProj === project.title
+                                                    }
+                                                }).length.toString()
+                                            }
+                                        </p>
+                                    </div>
+                                    <div className="project-informations">
+                                        <p><strong>Grupo: </strong> {project.group}</p>
+                                        <p><strong>Sala: </strong> 3° {project.room}</p>
+                                        <p><strong>Categoria: </strong>{project.category}</p>
+                                    </div>
+                                </div>
+                                <div className="project-body justify-content-between"> 
+                                    <div className="project-information"> 
+                                        <h5>Descrição</h5>
+                                        <div className="project-description">
                                             <p>
                                                 {project.description}
                                             </p>
-                                        </footer>
-                                    </Card.Body>
-                                </Accordion.Collapse>
-                            </Card>
+                                        </div>
+                                    </div>  
+                                    <div className="project-image">
+                                        <img src={`http://localhost:4000/files/${project.image}`} alt=""/>
+                                    </div>
+                                </div>
+                            </div>
                         ))}
-                    </Accordion>
-                </div>
+                </div>    
             </Main>
         )
     }

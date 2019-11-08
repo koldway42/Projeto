@@ -36,7 +36,7 @@ export default class visitors extends Component {
                     </thead>
                     <tbody>
                     {this.state.visitors.map((item, index) => (
-                        <tr>
+                        <tr key={item._id}>
                             <td> {index + 1} </td>
                             <td> {item.name} </td>
                             <td> {item.opinion} </td>

@@ -30,7 +30,7 @@ export default class PieGraph extends Component {
         let TotalRatings = 0
 
         const visitors = response.data;
-        visitors.map(item => {
+        visitors.forEach(item => {
             let rating = item.rating;
     
             switch(rating) {
@@ -55,8 +55,6 @@ export default class PieGraph extends Component {
             TotalRatings++
         })
 
-        console.log(this.state)
-
         this.state.TotalRatings = TotalRatings;
         const ratings = [];
         this.state.ratings.forEach((item, index, array ) => {
@@ -76,7 +74,7 @@ export default class PieGraph extends Component {
 
         let runGraph = false;
 
-        this.state.ratings.map(item => {
+        this.state.ratings.forEach(item => {
             if(item.y > 0) {
                 runGraph = true;
             }

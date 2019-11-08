@@ -34,6 +34,9 @@ export default class aside extends Component {
                 <a href="#/statistics" className="menu-item">
                     <i className={`fas fa-chart-pie mr-2`}></i> Estatísticas
                 </a>
+                <a href="#/roadmap" className="menu-item">
+                    <i className={`fas fa-flag mr-2`}></i> Roadmap
+                </a>
                 <a href="#/contact" className="menu-item">
                     <i className={`fa fa-phone-square mr-2`}></i> Contato
                 </a>

@@ -78,7 +78,19 @@ export default class Home extends Component {
                         Para o Lado servidor, foi utilizado NodeJS, um ambiente de execução JavaScript Assíncrono, orientado a eventos
                         que utiliza do motor interpretador de JavaScript v8, Criado pela <strong>Google</strong>. A principal característica do
                         do NodeJS é o NPM(Node Package Manager), que oferece uma plataforma de compartilhamento de Projetos do Node e uma
-                        ferramenta por linha de comando que permite a interação com os projeto antes aqui citados.
+                        ferramenta por linha de comando que permite a interação com os projetos antes aqui citados.
+                    </p>
+                    <h2> MongoDB </h2>
+                    <p>
+                        MongoDB é um banco de dados de propósito geral, baseado em documento e distribuído. Ser baseado em documento, 
+                        significa que os dados armazenados são organizados de forma parecida com um JSON . Existem 
+                        vários bancos NOSQL atualmente no mercado porque existem dezenas de problemas de persistência de dados que o SQL 
+                        tradicional não resolve.
+                    </p>
+                    <p>
+	                    O MongoDB foi criado com o BigData em mente, ou seja, ele aceita escalonamentos, tanto verticais, quanto horizontais, 
+                        então ele acaba sendo uma opção interessante para grande volumes de dados, especialmente os desestruturados, que seriam
+                        um problema para a imensa maioria dos bancos relacionais.
                     </p>
                     <hr />
                 </div>

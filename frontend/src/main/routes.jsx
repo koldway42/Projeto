@@ -9,6 +9,7 @@ import Contact from "../components/contact/contact"
 import Documentation from "../components/documentation/documentation"
 import Visitors from "../components/visitors/visitors"
 import Statistics from "../components/statistics/statistics"
+import Roadmap from "../components/roadmap/roadmap"
 
 export default props => {
     return (
@@ -20,6 +21,7 @@ export default props => {
             <Route path="/documentation" component={Documentation}/>
             <Route path="/feedback" component={Visitors}/>
             <Route path="/statistics" component={Statistics}/>
+            <Route path="/roadmap" component={Roadmap}/>
             <Redirect from="*" to="/" />
         </Switch>
     )
