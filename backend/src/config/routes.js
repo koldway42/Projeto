@@ -9,6 +9,9 @@ const upload = multer(UploadConfig);
 
 routes.get("/projects", publicationController.index);
 routes.post("/projects", upload.single("image"), publicationController.store);
+routes.get("/categories", publicationController.listCategories);
+routes.get("/rooms", publicationController.listRooms);
+
 routes.get("/visitors", visitorController.index);
 routes.post("/visitors", visitorController.store);
 

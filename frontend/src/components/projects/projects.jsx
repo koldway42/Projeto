@@ -1,5 +1,7 @@
 import React, {Component} from "react"
 
+import Pagination from 'react-bootstrap/Pagination'
+
 import api from "../../services/api";
 import Main from "../template/main";
 import "./projects.css";
@@ -8,32 +10,78 @@ export default class Projects extends Component {
     state = {
         projects: [],
         visitors: [],
+        categories: [],
+        rooms: [],
         filters: {
             category: "Todos",
             room: "Todos"
-        }
+        },
+        min: 0,
+        max: 3,
+        pages: 1,
+        active: 1
     };
 
     handleCategoryChange(e) {
         let savedState = this.state.filters;
         savedState.category = e.target.value
         this.setState( {filters: savedState} )
+        this.handleProjects();
     }
 
     handleRoomChange(e) {
         let savedState = this.state.filters;
         savedState.room = e.target.value
         this.setState( {filters: savedState} )
+        this.handleProjects();
     }
 
+    async handleProjects() {
+        const {category, room} = this.state.filters;
+        const {min, max} = this.state
 
-    async componentDidMount() {
-        const projects = await api.get("projects");
-        const visitors = await api.get("visitors")
+        const params = {
+            category,
+            room,
+            min,
+            max
+        }
+
+        const projects = await api.get("projects", { params });
 
         this.setState( {
-            projects: projects.data,
-            visitors: visitors.data
+            projects: projects.data.publications,
+            pages: (Math.ceil(projects.data.pages / max))
+        } )
+
+        console.log(this.state.pages)
+
+    }
+
+    async handlePagination(e) {
+        const key = e.target.innerText;
+        this.setState({
+            max: key * this.state.max,
+            min: (key * this.state.max) - this.state.max,
+            active: key
+        })
+
+        console.log(key)
+
+        this.handleProjects();
+    }
+
+    async componentDidMount() {
+        const visitors = await api.get("visitors");
+        const categories = await api.get("categories");
+        const rooms = await api.get("rooms");
+        
+        this.handleProjects();
+
+        this.setState( {
+            visitors: visitors.data,
+            categories: categories.data,
+            rooms: rooms.data
         } )
     }
 
@@ -43,6 +91,15 @@ export default class Projects extends Component {
       
     
     render() {
+        let active = this.state.active;
+        let items = [];
+        for (let number = 1; number <= this.state.pages; number++) {
+        items.push(
+            <Pagination.Item onClick={e => this.handlePagination(e)} key={number} active={number === active}>
+                {number}
+            </Pagination.Item>,
+        );
+        }
         return (
             <Main>
                 <div className="container-fluid p-3">
@@ -59,11 +116,7 @@ export default class Projects extends Component {
                                         value={this.state.rating}
                                         >
                                             <option>Todos</option>
-                                            {this.state.projects
-                                            .map(item => item.category)
-                                            .filter(this.unique)
-                                            .sort()
-                                            .map((item, index) => (
+                                            {this.state.categories.map((item, index) => (
                                                 <option key={index}>{item}</option>
                                             ))}
                                             
@@ -78,11 +131,7 @@ export default class Projects extends Component {
                                         value={this.state.rating}
                                         >
                                             <option>Todos</option>
-                                            {this.state.projects
-                                            .map(item => item.room)
-                                            .filter(this.unique)
-                                            .sort()
-                                            .map((item, index) => (
+                                            {this.state.rooms.map((item, index) => (
                                             <option key={index}>{item}</option>
                                         ))}
                                             
@@ -143,6 +192,7 @@ export default class Projects extends Component {
                                 </div>
                             </div>
                         ))}
+                        <Pagination>{items}</Pagination>
                 </div>    
             </Main>
         )

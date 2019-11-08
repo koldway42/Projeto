@@ -20,10 +20,55 @@ module.exports = {
     },
 
     async index(req, resp) {
-        const publications = await Publication.find();
+        const {category, room , min, max} = req.query;
+        console.log(req.query)
 
-        return resp.json(publications)
+        category === "Todos" ? "" : category;
+        room === "Todos" ? "" : room;
+
+        let publications = await Publication.find({
+            category: {$exists : true, $ne : ""},
+            room: {$exists : true, $ne : ""}
+        })
+
+        let pages = publications.length;
+
+        publications = await Publication.find({
+            category: {$exists : true, $ne : ""},
+            room: {$exists : true, $ne : ""}
+        }).limit(parseInt(max)).skip(parseInt(min));
+
+        
+
+        return resp.json({publications, pages })
     },
+
+    async listCategories(req, resp) {
+        let categories = await Publication.find({}, {category: 1, _id: 0})
+
+        categories = categories.map(item => item.category)
+
+        unique = (value, index, self) => {
+            return self.indexOf(value) === index
+        }
+
+        return resp.json(categories.filter(unique))
+
+    },
+
+    async listRooms(req, resp) {
+        let rooms = await Publication.find({}, {room: 1, _id: 0})
+
+        rooms = rooms.map(item => item.room)
+
+        unique = (value, index, self) => {
+            return self.indexOf(value) === index
+        }
+
+        return resp.json(rooms.filter(unique))
+
+    },
+
 
     async store(req, resp) {
         const { title, description, group, room, passwd, category } = req.body;
