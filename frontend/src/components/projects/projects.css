@@ -37,7 +37,7 @@ div.project-body .project-information {
 }
 
 div.project-header h5 {
-    font-size: 40px;
+    font-size: 30px;
     font-weight: 800;
     padding: 15px;
 }
@@ -54,6 +54,7 @@ div p.ratings {
 
 div.project-header div.project-informations {
     padding: 8px;
+    font-size: 14px;
     width: 40%;
     border: #ccc 1px solid;
     margin: 15px;
@@ -65,8 +66,12 @@ div.project-header div.project-informations {
 div.project-body .project-information div.project-description {
     padding: 8px;
     width: 80%;
-    height: 100%;
+    height: 80%;
     border: #ccc 1px solid;
+    text-align: justify;
+    padding: 15px;
+    text-indent: 30px;
+    overflow: auto;
     box-shadow: 
         2px 0 10px 0 rgba(0, 0, 0, 0.12),
         2px 0 15px 0 rgba(0, 0, 0, 0.09);
@@ -92,6 +97,9 @@ div#projects-filter {
     background: #eee;
     border-radius: 4px;
     border: solid 1px #ccc;
+    box-shadow: 
+        2px 0 10px 0 rgba(0, 0, 0, 0.12),
+        2px 0 15px 0 rgba(0, 0, 0, 0.09);
 }
 
 div#projects-filter ul li{

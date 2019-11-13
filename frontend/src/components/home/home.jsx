@@ -32,7 +32,7 @@ export default class Home extends Component {
                                 <Carousel.Item key={project._id}>
                                     <img
                                     className="d-block w-100"
-                                    src={`http://localhost:4000/files/${project.image}`}
+                                    src={`http://10.0.0.100:4000/files/${project.image}`}
                                     alt={project.title}
                                     />
                                     <Carousel.Caption>

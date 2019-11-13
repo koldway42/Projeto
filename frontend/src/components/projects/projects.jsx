@@ -16,9 +16,8 @@ export default class Projects extends Component {
             category: "Todos",
             room: "Todos"
         },
-        min: 1,
-        defaultMax: 2,
-        max: 2,
+        min: 0,
+        max: 3,
         pages: 1,
         active: 1
     };
@@ -28,8 +27,10 @@ export default class Projects extends Component {
         savedState.category = e.target.value
         this.setState( {filters: savedState} )
 
-        this.state.active = 1;
-        this.state.pages = 1;
+        this.setState({
+            active: 1,
+            pages: 1
+        })
         this.handleProjects();
     }
 
@@ -38,8 +39,10 @@ export default class Projects extends Component {
         savedState.room = e.target.value
         this.setState( {filters: savedState} )
 
-        this.state.active = 1;
-        this.state.pages = 1;
+        this.setState({
+            active: 1,
+            pages: 1
+        })
         this.handleProjects();
     }
 
@@ -59,9 +62,7 @@ export default class Projects extends Component {
             projects: projects.data.publications,
         } )
 
-        console.log(this.state);
-
-        if(this.state.pages == 1) {
+        if(this.state.pages === 1) {
 
             this.setState( {
                 pages: projects.data.pages,
@@ -74,12 +75,10 @@ export default class Projects extends Component {
     }
 
     async handlePagination(e) {
-        console.log("handled");
         const key = e.target.innerText;
 
         await this.setState({
-            min: ((key * this.state.defaultMax) - (this.state.defaultMax)),
-            max: key * this.state.defaultMax,
+            min: ((key * this.state.max) - (this.state.max)),
             active: parseInt(key)
         })
 
@@ -167,7 +166,7 @@ export default class Projects extends Component {
                                     <div>
                                         <h5>{project.title}</h5>
                                         <p className="ml-3 ratings">
-                                            <i class="far fa-heart fa-xs text-danger"> </i>
+                                            <i className="far fa-heart fa-xs text-danger"> </i>
                                             {
                                                 " " +
                                                 this.state.visitors
@@ -197,7 +196,7 @@ export default class Projects extends Component {
                                         </div>
                                     </div>  
                                     <div className="project-image">
-                                        <img src={`http://localhost:4000/files/${project.image}`} alt=""/>
+                                        <img src={`http://10.0.0.100:4000/files/${project.image}`} alt=""/>
                                     </div>
                                 </div>
                             </div>

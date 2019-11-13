@@ -95,7 +95,7 @@ export default class extends Component {
                     <form id="register-form" onSubmit={e => this.handleSubmit(e)}>
                         <div className="form-group row m-3">
                             <div className="col-12 mb-4">
-                                <label htmlFor="nome-projeto">Projeto</label>
+                                <label htmlFor="nome-projeto">Projeto*</label>
                                 <input type="text" 
                                 onChange={e => this.handleChange(e)} 
                                 id="nome-projeto" 
@@ -106,7 +106,7 @@ export default class extends Component {
                                 />
                             </div>
                             <div className="col-12 mb-4">
-                                <label htmlFor="nome-projeto">Grupo</label>
+                                <label htmlFor="nome-projeto">Grupo*</label>
                                 <input type="text"
                                 onChange={e => this.handleChange(e)} 
                                 id="nome-projeto" 
@@ -117,7 +117,7 @@ export default class extends Component {
                                 />
                             </div>
                             <div className="col-12 mb-4">
-                                <label htmlFor="nome-projeto">Descrição</label>
+                                <label htmlFor="nome-projeto">Descrição*</label>
                                 <textarea 
                                 id="nome-projeto" 
                                 onChange={e => this.handleChange(e)} 
@@ -129,7 +129,7 @@ export default class extends Component {
                                 />
                             </div>
                             <div className="form-group col-12 mb-4">
-                            <label htmlFor="TypeSelector">Categoria</label>
+                            <label htmlFor="TypeSelector">Categoria*</label>
                                 <select 
                                 className="form-control mb-3" 
                                 onChange={e => this.handleChange(e)} 
@@ -140,7 +140,7 @@ export default class extends Component {
                                     <option>Biomas</option>
                                     <option>Tecnológico</option>
                                 </select>
-                            <label htmlFor="RoomSelector">Sala</label>
+                            <label htmlFor="RoomSelector">Sala*</label>
                                 <select 
                                 className="form-control mb-3" 
                                 onChange={e => this.handleChange(e)} 
@@ -152,15 +152,15 @@ export default class extends Component {
                                     <option>02</option>
                                     <option>03</option>
                                 </select>
-                                <label htmlFor="exampleFormControlFile1">Imagem</label>
+                                <label htmlFor="exampleFormControlFile1">Imagem*</label>
                                 <input 
                                 type="file" 
                                 className="form-control-file" 
                                 onChange={e => this.handleImage(e)}
                                 />
                             </div>
-                            <div className="col-6 mt-3 mb-4">
-                                <label htmlFor="senha-admin">Senha de Administrador</label>
+                            <div className="col-12 mt-3 mb-4">
+                                <label htmlFor="senha-admin">Senha de Administrador*</label>
                                 <input type="password"
                                 onChange={e => this.handleChange(e)} 
                                 id="senha-admin" 
@@ -170,11 +170,18 @@ export default class extends Component {
                                 value={this.state.passwd}
                                 />
                             </div>
-                            <div className="col-12 mt-4 d-flex justify-content-end">
-                                <button className="btn bg-danger" type="reset">Cancelar</button>
-                                <button className="btn ml-2" type="submit">Enviar</button>
-                            </div>
                         </div>
+                            <div className="row">
+                                <div className="col-6 mt-4 d-flex justify-content-start">
+                                    <p>
+                                        <strong>Campos marcados com * são obrigatórios</strong>
+                                    </p>
+                                </div>
+                                <div className="col-6 mt-4 d-flex justify-content-end">
+                                    <button className="btn bg-danger" type="reset">Cancelar</button>
+                                    <button className="btn ml-2" type="submit">Enviar</button>
+                                </div>
+                            </div>
                     </form>
                 </div>
             </Main>

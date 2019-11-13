@@ -15,8 +15,8 @@ export default class Home extends Component {
                     <p>
                         Nessa seção, todas as informações relacionadas com o desenvolvimento desse sistema, como funcionalidades e
                         ferramentas utilizadas. Primeiro, há uma lista com todas as Ferramentas Utilizadas, Após isso, um breve resumo das
-                        main importantes será oferecido, e por fim, todas as funcionalidades dos sistemas será explicadas, desde seu funcionamento interno,
-                        até seu uso pelo usuário.
+                        mais importantes será oferecido, e por fim, as funcionalidades principais do sistemas serão explicadas, em seu mais
+                        alto nível, sem elevado nível de complexidade.
                     </p>
                     <div className="card p-4 bg-dark">
                         <h5 className="p-4 text-white">
@@ -65,6 +65,7 @@ export default class Home extends Component {
                         </ul>
                     </div>
                     <hr/>
+                    <h2><strong>Ferramentas mais Importantes</strong></h2>
                     <h2> ReactJS </h2>
                     <p>
                         Esse projeto foi contruído utilizando a biblioteca JavaScript <strong>ReactJS</strong>.
@@ -93,6 +94,30 @@ export default class Home extends Component {
                         um problema para a imensa maioria dos bancos relacionais.
                     </p>
                     <hr />
+                    <h2><strong>Funcionalidades do Sistema</strong></h2>
+                    <h2> Cadastro de Projetos </h2>
+                    <p>
+                        Na área de cadastro de projeto, é possível digitando todas as informações necessárias, realizar
+                        o cadastro de um projeto no sistema. Após o cadastro, o projeto será exibido na área de projetos
+                        e estará disponível para receber um <i>"Feedback"</i> na área de <i>"Feedback"</i>
+                    </p>
+                    <h2> Filtro de projetos e paginação </h2>
+                    <p>
+                        Na área de exibição de projetos, há uma seção de filtros, onde o usuário pode filtrar
+                        seus resultados com base em dois critérios: "Categoria" e "Sala". Os resultados retornados terão
+                        base aos filtros utilizados.
+                    </p>
+                    <p>
+                        A página também usa um sistema de paginação, onde apenas uma parcela dos resultados são retornados
+                        (No caso desse sistema, 5 de cada vez), isso além de organizar a visualização dos item, ainda ajuda
+                        sistemas maiores a não sobrecarregar com muitas requisições.
+                    </p>
+                    <h2> <i>"Feedback"</i> </h2>
+                    <p>
+                        Na área de <i>"Feedback"</i>, é possivel dar sua opinião sobre este projeto e votar no projeto que você
+                        mais gostou em cada categoria existente(Nesse caso, duas). Os dados obtidos são utilizados para alimentar
+                        os gráficos existentes na área de estatísticas.
+                    </p>
                 </div>
             </Main>
         )

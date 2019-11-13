@@ -38,7 +38,7 @@ module.exports = {
         let pages = publications.length;
         pages = Math.ceil(pages / parseInt(max))
 
-        publications = await Publication.find(filters).limit(parseInt(max)).skip(parseInt(min));
+        publications = await Publication.find(filters).skip(parseInt(min)).limit(parseInt(max));
 
 
         return resp.json({ publications, pages })

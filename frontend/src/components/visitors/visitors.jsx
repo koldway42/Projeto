@@ -108,7 +108,7 @@ export default class visitors extends Component {
               <form id="visitor-form" onSubmit={e => this.handleSubmit(e)}>
                 <div className="row">
                   <div className="col-5 mt-3 mb-4">
-                    <label htmlFor="visitor-name">Nome</label>
+                    <label htmlFor="visitor-name">Nome*</label>
                     <input type="text"
                     onChange={e => this.handleChange(e)} 
                     id="visitor-name" 
@@ -119,7 +119,7 @@ export default class visitors extends Component {
                   />
                   </div>
                   <div className="col-5 mt-3 mb-4">
-                    <label htmlFor="visitor-email">Email</label>
+                    <label htmlFor="visitor-email">Email*</label>
                     <input type="text"
                     onChange={e => this.handleChange(e)} 
                     id="visitor-email" 
@@ -130,7 +130,7 @@ export default class visitors extends Component {
                   />
                   </div>
                   <div className="col-2 mt-3 mb-2">
-                    <label >Avaliação</label>
+                    <label >Avaliação*</label>
                     <select 
                     className="form-control mb-3" 
                     onChange={e => this.handleChange(e)} 
@@ -146,7 +146,7 @@ export default class visitors extends Component {
                     </select>
                   </div>
                   <div className="col-12 mb-4">
-                      <label htmlFor="opinion-visitor">Opinião(Opcional)</label>
+                      <label htmlFor="opinion-visitor">Opinião</label>
                       <textarea 
                       id="opinion-visitor" 
                       onChange={e => this.handleChange(e)} 
@@ -159,7 +159,7 @@ export default class visitors extends Component {
                   </div>
                 </div>
                 <div className="col-4 mt-3 mb-2">
-                  <label >Projeto mais apreciado(Biomas)</label>
+                  <label >Projeto mais apreciado(Biomas)*</label>
                   <select 
                   className="form-control mb-3" 
                   onChange={e => this.handleChange(e)} 
@@ -175,7 +175,7 @@ export default class visitors extends Component {
                   </select>
                 </div>
                 <div className="col-4 mt-3 mb-2">
-                  <label >Projeto mais apreciado(Tecnológico)</label>
+                  <label >Projeto mais apreciado(Tecnológico)*</label>
                   <select 
                   className="form-control mb-3" 
                   onChange={e => this.handleChange(e)} 
@@ -189,9 +189,14 @@ export default class visitors extends Component {
                       ))}
                   </select>
                 </div>
-              <div className="col-12 mt-4 d-flex justify-content-end">
-                  <button className="btn bg-danger" type="reset">Cancelar</button>
-                  <button className="btn ml-2" type="submit">Enviar</button>
+                <div className="row">
+                  <div className="col-6 mt-4 d-flex justify-content-start">
+                      <strong>Campos marcados com * são obrigatórios</strong>
+                  </div>
+                  <div className="col-6 mt-4 d-flex justify-content-end">
+                      <button className="btn bg-danger" type="reset">Cancelar</button>
+                      <button className="btn ml-2" type="submit">Enviar</button>
+                  </div>
               </div>
               </form>
               <hr/>
