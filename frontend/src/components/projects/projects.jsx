@@ -16,8 +16,9 @@ export default class Projects extends Component {
             category: "Todos",
             room: "Todos"
         },
-        min: 0,
-        max: 3,
+        min: 1,
+        defaultMax: 2,
+        max: 2,
         pages: 1,
         active: 1
     };
@@ -26,6 +27,9 @@ export default class Projects extends Component {
         let savedState = this.state.filters;
         savedState.category = e.target.value
         this.setState( {filters: savedState} )
+
+        this.state.active = 1;
+        this.state.pages = 1;
         this.handleProjects();
     }
 
@@ -33,42 +37,54 @@ export default class Projects extends Component {
         let savedState = this.state.filters;
         savedState.room = e.target.value
         this.setState( {filters: savedState} )
+
+        this.state.active = 1;
+        this.state.pages = 1;
         this.handleProjects();
     }
 
     async handleProjects() {
-        const {category, room} = this.state.filters;
+        const filters = this.state.filters;
         const {min, max} = this.state
 
         const params = {
-            category,
-            room,
+            filters,
             min,
             max
         }
 
-        const projects = await api.get("projects", { params });
+        const projects = await api.get("projectsFilter", { params });
 
-        this.setState( {
+        await this.setState( {
             projects: projects.data.publications,
-            pages: (Math.ceil(projects.data.pages / max))
         } )
 
-        console.log(this.state.pages)
+        console.log(this.state);
 
+        if(this.state.pages == 1) {
+
+            this.setState( {
+                pages: projects.data.pages,
+        } ) 
+        }
+    }
+
+    scrollTop = () => {
+        document.getElementById("projects-title").scrollIntoView();
     }
 
     async handlePagination(e) {
+        console.log("handled");
         const key = e.target.innerText;
-        this.setState({
-            max: key * this.state.max,
-            min: (key * this.state.max) - this.state.max,
-            active: key
+
+        await this.setState({
+            min: ((key * this.state.defaultMax) - (this.state.defaultMax)),
+            max: key * this.state.defaultMax,
+            active: parseInt(key)
         })
 
-        console.log(key)
-
-        this.handleProjects();
+        await this.handleProjects();
+        this.scrollTop();
     }
 
     async componentDidMount() {
@@ -88,18 +104,24 @@ export default class Projects extends Component {
     unique = (value, index, self) => {
         return self.indexOf(value) === index
     }
-      
     
-    render() {
+    pagination = () => {
         let active = this.state.active;
         let items = [];
+
         for (let number = 1; number <= this.state.pages; number++) {
-        items.push(
-            <Pagination.Item onClick={e => this.handlePagination(e)} key={number} active={number === active}>
-                {number}
-            </Pagination.Item>,
-        );
+            items.push(
+                <Pagination.Item onClick={e => this.handlePagination(e)} key={number} active={number === active}>
+                    {number}
+                </Pagination.Item>,
+            );
         }
+
+        return(items)
+    }
+    
+    render() {
+
         return (
             <Main>
                 <div className="container-fluid p-3">
@@ -139,19 +161,7 @@ export default class Projects extends Component {
                                     </div>
                             </div>
                     </div>
-                        {this.state.projects
-                        .filter(item => {
-                            let Corresponds = true;
-                            for(let el in this.state.filters) {
-                                let value = this.state.filters[el];
-                                let exists = Object.values(item).indexOf(value) === -1;
-                                if(value !== "Todos" && exists) {
-                                    Corresponds = false;
-                                }
-                            }
-                            return Corresponds;
-                        })
-                        .map((project) => (
+                        {this.state.projects.map((project) => (
                             <div className="project" key={project._id}>
                                 <div className="project-header">
                                     <div>
@@ -192,7 +202,7 @@ export default class Projects extends Component {
                                 </div>
                             </div>
                         ))}
-                        <Pagination>{items}</Pagination>
+                        <Pagination>{this.pagination()}</Pagination>
                 </div>    
             </Main>
         )

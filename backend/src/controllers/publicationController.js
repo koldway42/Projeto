@@ -20,27 +20,28 @@ module.exports = {
     },
 
     async index(req, resp) {
-        const {category, room , min, max} = req.query;
-        console.log(req.query)
+        const publications = await Publication.find();
 
-        category === "Todos" ? "" : category;
-        room === "Todos" ? "" : room;
+        return resp.json(publications);
+    },
 
-        let publications = await Publication.find({
-            category: {$exists : true, $ne : ""},
-            room: {$exists : true, $ne : ""}
-        })
+    async filter(req, resp) {
+        let {filters, min, max} = req.query;
+
+        filters = JSON.parse(filters);
+
+        filters.category === "Todos" ? delete filters.category : filters.category;
+        filters.room === "Todos" ? delete filters.room : filters.room;
+
+        let publications = await Publication.find(filters)
 
         let pages = publications.length;
+        pages = Math.ceil(pages / parseInt(max))
 
-        publications = await Publication.find({
-            category: {$exists : true, $ne : ""},
-            room: {$exists : true, $ne : ""}
-        }).limit(parseInt(max)).skip(parseInt(min));
+        publications = await Publication.find(filters).limit(parseInt(max)).skip(parseInt(min));
 
-        
 
-        return resp.json({publications, pages })
+        return resp.json({ publications, pages })
     },
 
     async listCategories(req, resp) {

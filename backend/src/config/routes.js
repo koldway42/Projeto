@@ -8,6 +8,7 @@ const routes = express.Router();
 const upload = multer(UploadConfig);
 
 routes.get("/projects", publicationController.index);
+routes.get("/projectsFilter", publicationController.filter)
 routes.post("/projects", upload.single("image"), publicationController.store);
 routes.get("/categories", publicationController.listCategories);
 routes.get("/rooms", publicationController.listRooms);
